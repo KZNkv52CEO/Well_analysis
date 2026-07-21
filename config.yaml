@@ -1,0 +1,77 @@
+# Configuration file for well_analysis
+# Customize petrophysical parameters here instead of editing code
+
+# Larionov Formula Parameters (Shale Volume Calculation)
+larionov:
+  # Coefficient for young/unconsolidated sediments
+  coefficient: 0.083
+  # Exponent
+  exponent: 3.7
+  # GR reference percentiles (for calibration)
+  gr_clean_percentile: 5      # Clean sand reference (5th percentile)
+  gr_shale_percentile: 95     # Shale reference (95th percentile)
+
+# Porosity Parameters (Neutron-derived)
+porosity:
+  # Maximum porosity fraction (0-1)
+  phi_max: 0.30
+  # Minimum porosity fraction (0-1)
+  phi_min: 0.02
+  # Porosity attributed to shale matrix (for correction)
+  phi_shale: 0.30
+  # Neutron log reference percentiles
+  neutron_min_percentile: 5
+  neutron_max_percentile: 95
+
+# Timur Equation Parameters (Permeability Estimation)
+permeability:
+  # Coefficient (K = coefficient * (phi^exp1 / swir)^exp2)
+  coefficient: 100.0
+  # Porosity exponent
+  porosity_exponent: 2.25
+  # Saturation exponent
+  saturation_exponent: 2
+  # Irreducible water saturation (Swir)
+  swir: 0.25
+  # Physical validity clipping range (millidarcies)
+  min_permeability: 0.01
+  max_permeability: 1000.0
+
+# LAS File Settings
+las:
+  # Default null value marker in LAS file
+  null_value: -999.25
+  # Required curve names (case-sensitive)
+  required_curves:
+    - DEPT      # Depth (meters)
+    - GR        # Gamma Ray (API)
+    - neutron   # Neutron Porosity
+    - PZ        # Shallow Resistivity (Ohm-m)
+    - LLD       # Deep Resistivity (Ohm-m)
+  # File encoding
+  encoding: utf-8
+
+# Output Settings
+output:
+  # CSV separator
+  csv_separator: ";"
+  # CSV float precision (decimal places)
+  csv_precision: 4
+  # PNG resolution (DPI)
+  png_dpi: 150
+  # Plot figure size (width, height) in inches
+  plot_figsize: [15, 11]
+
+# Logging
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: INFO
+  # Log format
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+
+# Processing
+processing:
+  # Create output directory if missing
+  create_output_dir: true
+  # Overwrite existing output files
+  overwrite: true
